@@ -1,4 +1,4 @@
-# ORSSerialPort 
+# ORSSerialPort - Seeeduino XIAO
 
 This is a fork of the ([ORSSerialPort](https://github.com/armadsen/ORSSerialPort)) Serial port library for Objective-C and Swift macOS apps
 
