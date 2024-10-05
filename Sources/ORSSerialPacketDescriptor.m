@@ -96,6 +96,23 @@
 	return self;
 }
 
+	public func openPort(portMode: PortMode = .receiveAndTransmit) throws {
+		lock.lock()
+		defer { lock.unlock() }
+		guard !path.isEmpty else { throw PortError.invalidPath }
+		guard isOpen == false else { throw PortError.instanceAlreadyOpen }
+
+		let readWriteParam: Int32
+
+		switch portMode {
+		case .receive:
+			readWriteParam = O_RDONLY
+		case .transmit:
+			readWriteParam = O_WRONLY
+		case .receiveAndTransmit:
+			readWriteParam = O_RDWR
+		}
+
 - (instancetype)initWithPrefixString:(NSString *)prefixString
 						suffixString:(NSString *)suffixString
 				 maximumPacketLength:(NSUInteger)maxPacketLength
