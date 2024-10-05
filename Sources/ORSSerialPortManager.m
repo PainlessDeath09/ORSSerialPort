@@ -296,6 +296,25 @@ static ORSSerialPortManager *sharedInstance = nil;
 	}
 }
 
+public struct BaudRateSetting {
+		public let receiveRate: BaudRate
+		public let transmitRate: BaudRate
+
+		public init(receiveRate: BaudRate, transmitRate: BaudRate) {
+			self.receiveRate = receiveRate
+			self.transmitRate = transmitRate
+		}
+
+		public static func symmetrical(_ baudRate: BaudRate) -> BaudRateSetting {
+			Self(receiveRate: baudRate, transmitRate: baudRate)
+		}
+
+		public static func asymmetrical(receiveRate: BaudRate, transmitRate: BaudRate) -> BaudRateSetting {
+			Self(receiveRate: receiveRate, transmitRate: transmitRate)
+		}
+	}
+
+
 - (NSUInteger)countOfAvailablePorts { return [_availablePorts count]; }
 - (id)objectInAvailablePortsAtIndex:(NSUInteger)index { return _availablePorts[index]; }
 - (void)insertAvailablePorts:(NSArray *)array atIndexes:(NSIndexSet *)indexes { [_availablePorts insertObjects:array atIndexes:indexes]; }
